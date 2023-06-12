@@ -1,7 +1,10 @@
 package com.dessalines.thumbkey.ui.components.keyboard
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,14 +42,15 @@ import com.dessalines.thumbkey.utils.toBool
 @Composable
 fun KeyboardScreen(
     settings: AppSettings?,
-    onSwitchLanguage: () -> Unit
+    onSwitchLanguage: () -> Unit,
+    onSwitchPosition: () -> Unit,
 ) {
     val ctx = LocalContext.current as IMEService
 
     var mode by remember {
         val startMode = getKeyboardMode(
             ime = ctx,
-            autoCapitalize = settings?.autoCapitalize?.toBool() ?: false
+            autoCapitalize = settings?.autoCapitalize?.toBool() ?: false,
         )
 
         mutableStateOf(startMode)
@@ -62,8 +66,8 @@ fun KeyboardScreen(
     val keyboardGroup = keyboardLayoutToModes(
         KeyboardLayout.values().sortedBy { it.index }[
             settings?.keyboardLayout
-                ?: DEFAULT_KEYBOARD_LAYOUT
-        ]
+                ?: DEFAULT_KEYBOARD_LAYOUT,
+        ],
     )
 
     val keyboard = keyboardGroup[mode] ?: THUMBKEY_EN_V4_MAIN
@@ -71,8 +75,8 @@ fun KeyboardScreen(
     val alignment = keyboardPositionToAlignment(
         KeyboardPosition.values()[
             settings?.position
-                ?: DEFAULT_POSITION
-        ]
+                ?: DEFAULT_POSITION,
+        ],
     )
     val pushupSizeDp = (settings?.pushupSize ?: DEFAULT_PUSHUP_SIZE).dp
 
@@ -86,11 +90,11 @@ fun KeyboardScreen(
     Box(
         contentAlignment = alignment,
         modifier = Modifier
-            .padding(bottom = pushupSizeDp)
+            .padding(bottom = pushupSizeDp),
     ) {
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colorScheme.onBackground)
+                .background(MaterialTheme.colorScheme.onBackground),
         ) {
             keyboard.arr.forEach { row ->
                 Row {
@@ -140,7 +144,8 @@ fun KeyboardScreen(
                                         }
                                     }
                                 },
-                                onSwitchLanguage = onSwitchLanguage
+                                onSwitchLanguage = onSwitchLanguage,
+                                onSwitchPosition = onSwitchPosition,
                             )
                         }
                     }

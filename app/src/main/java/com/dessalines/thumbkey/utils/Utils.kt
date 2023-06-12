@@ -31,23 +31,41 @@ import com.dessalines.thumbkey.IMEService
 import com.dessalines.thumbkey.MainActivity
 import com.dessalines.thumbkey.R
 import com.dessalines.thumbkey.db.DEFAULT_KEYBOARD_LAYOUT
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_DE_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_EN_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_EN_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_FR_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_HE_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_RU_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.T9_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_BY_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_BY_V1_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_DA_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_DE_V2_KEYBOARD_MODES
-import com.dessalines.thumbkey.keyboards.THUMBKEY_DK_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_DE_V2_MULTILINGUAL_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_PROGRAMMER_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_ES_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EU_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FA_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FI_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_FI_V1_WIDE_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FR_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_FR_V2_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_ID_V1_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_IT_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_JA_V1_HIRAGANA_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_JA_V1_KATAKANA_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_KA_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_NL_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_NO_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_PL_V2_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_PT_V1_KEYBOARD_MODES
-import com.dessalines.thumbkey.keyboards.THUMBKEY_RU_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_RU_V2_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_RU_V2_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_SV_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_TR_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_UK_V1_KEYBOARD_MODES
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -85,21 +103,39 @@ fun keyboardLayoutToModes(layout: KeyboardLayout): Map<KeyboardMode, KeyboardC> 
         KeyboardLayout.ThumbKeyENv4 -> THUMBKEY_EN_V4_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyENv4Programmer -> THUMBKEY_EN_V4_PROGRAMMER_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyDEv2 -> THUMBKEY_DE_V2_KEYBOARD_MODES
-        KeyboardLayout.ThumbKeyDKv1 -> THUMBKEY_DK_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyDAv1 -> THUMBKEY_DA_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyESv1 -> THUMBKEY_ES_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyEUv1 -> THUMBKEY_EU_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyFAv1 -> THUMBKEY_FA_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyFIv1 -> THUMBKEY_FI_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyFIv1Wide -> THUMBKEY_FI_V1_WIDE_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyFRv1 -> THUMBKEY_FR_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyITv1 -> THUMBKEY_IT_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyNLv1 -> THUMBKEY_NL_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyPLv2 -> THUMBKEY_PL_V2_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyPTv1 -> THUMBKEY_PT_V1_KEYBOARD_MODES
-        KeyboardLayout.ThumbKeyRUv1 -> THUMBKEY_RU_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyRUv2 -> THUMBKEY_RU_V2_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyUKv1 -> THUMBKEY_UK_V1_KEYBOARD_MODES
         KeyboardLayout.MessageEaseEN -> MESSAGEEASE_EN_KEYBOARD_MODES
         KeyboardLayout.MessageEaseENSymbols -> MESSAGEEASE_EN_SYMBOLS_KEYBOARD_MODES
         KeyboardLayout.MessageEaseHE -> MESSAGEEASE_HE_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyENv4Symbols -> THUMBKEY_EN_V4_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyRUv2Symbols -> THUMBKEY_RU_V2_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyBYv1 -> THUMBKEY_BY_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyBYv1Symbols -> THUMBKEY_BY_V1_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseDE -> MESSAGEEASE_DE_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyNOv1 -> THUMBKEY_NO_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyDEv2MultiLingual -> THUMBKEY_DE_V2_MULTILINGUAL_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyKAv1 -> THUMBKEY_KA_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyIDv1 -> THUMBKEY_ID_V1_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseFR -> MESSAGEEASE_FR_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseRUSymbols -> MESSAGEEASE_RU_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.T9v1 -> T9_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyJAv1Hiragana -> THUMBKEY_JA_V1_HIRAGANA_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyJAv1Katakana -> THUMBKEY_JA_V1_KATAKANA_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyFRv2 -> THUMBKEY_FR_V2_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeySVv1 -> THUMBKEY_SV_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyTRv1 -> THUMBKEY_TR_V1_KEYBOARD_MODES
     }
 }
 
@@ -114,7 +150,7 @@ fun keyboardPositionToAlignment(position: KeyboardPosition): Alignment {
 /**
  * If this doesn't meet the minimum swipe length, it returns null
  */
-fun swipeDirection(x: Float, y: Float, minSwipeLength: Int): SwipeDirection? {
+fun swipeDirection(x: Float, y: Float, minSwipeLength: Int, swipeType: SwipeNWay = SwipeNWay.EIGHT_WAY): SwipeDirection? {
     val xD = x.toDouble()
     val yD = y.toDouble()
 
@@ -128,37 +164,37 @@ fun swipeDirection(x: Float, y: Float, minSwipeLength: Int): SwipeDirection? {
             angleDir
         }
 
-        return when (angle) {
-            in 22.5..67.5 -> {
-                SwipeDirection.BOTTOM_RIGHT
+        when (swipeType) {
+            // 0 degrees = down, increasing counter-clockwise
+            SwipeNWay.EIGHT_WAY -> return when (angle) {
+                in 22.5..67.5 -> SwipeDirection.BOTTOM_RIGHT
+                in 67.5..112.5 -> SwipeDirection.RIGHT
+                in 112.5..157.5 -> SwipeDirection.TOP_RIGHT
+                in 157.5..202.5 -> SwipeDirection.TOP
+                in 202.5..247.5 -> SwipeDirection.TOP_LEFT
+                in 247.5..292.5 -> SwipeDirection.LEFT
+                in 292.5..337.5 -> SwipeDirection.BOTTOM_LEFT
+                else -> SwipeDirection.BOTTOM
             }
-
-            in 67.5..112.5 -> {
-                SwipeDirection.RIGHT
+            SwipeNWay.FOUR_WAY_CROSS -> return when (angle) {
+                in 45.0..135.0 -> SwipeDirection.RIGHT
+                in 135.0..225.0 -> SwipeDirection.TOP
+                in 225.0..315.0 -> SwipeDirection.LEFT
+                else -> SwipeDirection.BOTTOM
             }
-
-            in 112.5..157.5 -> {
-                SwipeDirection.TOP_RIGHT
+            SwipeNWay.FOUR_WAY_DIAGONAL -> return when (angle) {
+                in 0.0..90.0 -> SwipeDirection.BOTTOM_RIGHT
+                in 90.0..180.0 -> SwipeDirection.TOP_RIGHT
+                in 180.0..270.0 -> SwipeDirection.TOP_LEFT
+                else -> SwipeDirection.BOTTOM_LEFT
             }
-
-            in 157.5..202.5 -> {
-                SwipeDirection.TOP
+            SwipeNWay.TWO_WAY_HORIZONTAL -> return when (angle) {
+                in 0.0..180.0 -> SwipeDirection.RIGHT
+                else -> SwipeDirection.LEFT
             }
-
-            in 202.5..247.5 -> {
-                SwipeDirection.TOP_LEFT
-            }
-
-            in 247.5..292.5 -> {
-                SwipeDirection.LEFT
-            }
-
-            in 292.5..337.5 -> {
-                SwipeDirection.BOTTOM_LEFT
-            }
-
-            else -> {
-                SwipeDirection.BOTTOM
+            SwipeNWay.TWO_WAY_VERTICAL -> return when (angle) {
+                in 90.0..270.0 -> SwipeDirection.TOP
+                else -> SwipeDirection.BOTTOM
             }
         }
     } else {
@@ -174,7 +210,8 @@ fun performKeyAction(
     onToggleNumericMode: (enable: Boolean) -> Unit,
     onToggleCapsLock: () -> Unit,
     onAutoCapitalize: (enable: Boolean) -> Unit,
-    onSwitchLanguage: () -> Unit
+    onSwitchLanguage: () -> Unit,
+    onSwitchPosition: () -> Unit,
 ) {
     when (action) {
         is KeyAction.CommitText -> {
@@ -182,14 +219,16 @@ fun performKeyAction(
             Log.d(TAG, "committing key text: $text")
             ime.currentInputConnection.commitText(
                 text,
-                text.length
+                1,
             )
 
             if (autoCapitalize) {
                 autoCapitalize(
                     ime = ime,
-                    onAutoCapitalize = onAutoCapitalize
+                    onAutoCapitalize = onAutoCapitalize,
                 )
+            } else { // To return to MAIN mode after a shifted key action.
+                onAutoCapitalize(false)
             }
         }
         is KeyAction.SendEvent -> {
@@ -208,12 +247,12 @@ fun performKeyAction(
             ime.currentInputConnection.deleteSurroundingText(action.trimCount, 0)
             ime.currentInputConnection.commitText(
                 text,
-                1
+                1,
             )
             if (autoCapitalize) {
                 autoCapitalize(
                     ime = ime,
-                    onAutoCapitalize = onAutoCapitalize
+                    onAutoCapitalize = onAutoCapitalize,
                 )
             }
         }
@@ -235,12 +274,12 @@ fun performKeyAction(
         }
         KeyAction.IMECompleteAction -> {
             val imeAction = getImeActionCode(ime)
-            if (arrayOf(
+            if (listOf(
                     EditorInfo.IME_ACTION_DONE,
                     EditorInfo.IME_ACTION_GO,
                     EditorInfo.IME_ACTION_NEXT,
                     EditorInfo.IME_ACTION_SEARCH,
-                    EditorInfo.IME_ACTION_SEND
+                    EditorInfo.IME_ACTION_SEND,
                 ).contains(imeAction)
             ) {
                 ime.currentInputConnection.performEditorAction(imeAction)
@@ -266,6 +305,7 @@ fun performKeyAction(
             ime.currentInputConnection.performContextMenuAction(16908322)
         }
         KeyAction.SwitchLanguage -> onSwitchLanguage()
+        KeyAction.SwitchPosition -> onSwitchPosition()
     }
 }
 
@@ -285,7 +325,7 @@ fun getImeActionCode(ime: IMEService): Int {
 fun getKeyboardMode(ime: IMEService, autoCapitalize: Boolean): KeyboardMode {
     val inputType = ime.currentInputEditorInfo.inputType and (InputType.TYPE_MASK_CLASS)
 
-    return if (arrayOf(InputType.TYPE_CLASS_NUMBER, InputType.TYPE_CLASS_PHONE).contains(inputType)) {
+    return if (listOf(InputType.TYPE_CLASS_NUMBER, InputType.TYPE_CLASS_PHONE).contains(inputType)) {
         KeyboardMode.NUMERIC
     } else {
         if (autoCapitalize && autoCapitalizeCheck(ime)) {
@@ -303,7 +343,7 @@ fun getImeActionText(ime: IMEService): String {
 
 private fun autoCapitalize(
     ime: IMEService,
-    onAutoCapitalize: (enable: Boolean) -> Unit
+    onAutoCapitalize: (enable: Boolean) -> Unit,
 ) {
     autoCapitalizeI(ime)
 
@@ -315,7 +355,7 @@ private fun autoCapitalize(
 }
 
 fun autoCapitalizeI(
-    ime: IMEService
+    ime: IMEService,
 ) {
     // Capitalizes 'i'
     val textBefore = ime.currentInputConnection.getTextBeforeCursor(3, 0)
@@ -324,21 +364,21 @@ fun autoCapitalizeI(
             ime.currentInputConnection.deleteSurroundingText(2, 0)
             ime.currentInputConnection.commitText(
                 "I ",
-                1
+                1,
             )
         }
     }
 }
 
 fun autoCapitalizeCheck(
-    ime: IMEService
+    ime: IMEService,
 ): Boolean {
     // Knows if its an empty field
     val empty = ime.currentInputConnection.getTextBeforeCursor(1, 0).isNullOrEmpty()
 
     // For punctuation ending
     val textBefore = ime.currentInputConnection.getTextBeforeCursor(2, 0)
-    return (arrayOf(". ", "? ", "! ").contains(textBefore)) || empty
+    return (listOf(". ", "? ", "! ").contains(textBefore)) || empty
 }
 
 fun deleteLastWord(ime: IMEService) {
@@ -346,7 +386,7 @@ fun deleteLastWord(ime: IMEService) {
 
     val trimmedLength = lastWords?.length?.minus(lastWords.trimmedLength()) ?: 0
     val trimmed = lastWords?.trim()
-    val lastWordLength = trimmed?.split(" ")?.lastOrNull()?.length ?: 1
+    val lastWordLength = trimmed?.split("\\s".toRegex())?.lastOrNull()?.length ?: 1
     val minDelete = if (lastWordLength > 0) {
         lastWordLength + trimmedLength
     } else {
@@ -357,9 +397,11 @@ fun deleteLastWord(ime: IMEService) {
 }
 
 fun buildTapActions(
-    keyItem: KeyItemC
+    keyItem: KeyItemC,
 ): List<KeyAction> {
-    return listOf(keyItem.center.action, *keyItem.nextTapActions.orEmpty())
+    val mutable = mutableListOf(keyItem.center.action)
+    mutable.addAll(keyItem.nextTapActions.orEmpty())
+    return mutable.toList()
 }
 
 fun doneKeyAction(
@@ -367,7 +409,7 @@ fun doneKeyAction(
     action: KeyAction,
     pressed: MutableState<Boolean>,
     releasedKey: MutableState<String?>,
-    animationHelperSpeed: Int
+    animationHelperSpeed: Int,
 ) {
     pressed.value = false
     scope.launch {
@@ -390,13 +432,13 @@ fun SimpleTopAppBar(
     text: String,
     navController: NavController,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    showBack: Boolean = true
+    showBack: Boolean = true,
 ) {
     TopAppBar(
         scrollBehavior = scrollBehavior,
         title = {
             Text(
-                text = text
+                text = text,
             )
         },
         navigationIcon = {
@@ -404,11 +446,11 @@ fun SimpleTopAppBar(
                 IconButton(onClick = { navController.navigate("settings") }) {
                     Icon(
                         Icons.Outlined.ArrowBack,
-                        contentDescription = stringResource(R.string.settings)
+                        contentDescription = stringResource(R.string.settings),
                     )
                 }
             }
-        }
+        },
     )
 }
 
@@ -423,14 +465,14 @@ fun Boolean.toInt() = this.compareTo(false)
 fun keyboardLayoutsSetFromString(layouts: String?): Set<Int> {
     return layouts?.split(",")?.map { it.trim().toInt() }?.toSet()
         ?: setOf(
-            DEFAULT_KEYBOARD_LAYOUT
+            DEFAULT_KEYBOARD_LAYOUT,
         )
 }
 
 fun keyboardLayoutsSetFromTitleIndex(layouts: String?): Set<Int> {
     return layouts?.split(",")?.map { keyboardTitleIndexFromRealIndex(it.trim().toInt()) }?.toSet()
         ?: setOf(
-            keyboardTitleIndexFromRealIndex(DEFAULT_KEYBOARD_LAYOUT)
+            keyboardTitleIndexFromRealIndex(DEFAULT_KEYBOARD_LAYOUT),
         )
 }
 

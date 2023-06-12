@@ -14,7 +14,7 @@ import com.dessalines.thumbkey.utils.ThemeMode
 @Composable
 fun ThumbkeyTheme(
     settings: AppSettings?,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val themeMode = ThemeMode.values()[settings?.theme ?: 0]
     val themeColor = ThemeColor.values()[settings?.themeColor ?: 0]
@@ -33,6 +33,8 @@ fun ThumbkeyTheme(
         ThemeColor.Dynamic -> dynamicPair
         ThemeColor.Green -> green()
         ThemeColor.Pink -> pink()
+        ThemeColor.Srcery -> srcery()
+        ThemeColor.Blue -> blue()
     }
 
     val systemTheme = if (!isSystemInDarkTheme()) {
@@ -51,6 +53,6 @@ fun ThumbkeyTheme(
         colorScheme = colors,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }

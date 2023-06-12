@@ -26,7 +26,7 @@
   <p align="center">
     <a href="https://apt.izzysoft.de/fdroid/index/apk/com.dessalines.thumbkey"><img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80"></a>
     <a href="https://f-droid.org/packages/com.dessalines.thumbkey"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80"></a>
-    <!-- <a href="https://play.google.com/store/apps/details?id=com.dessalines.thumbkey"><img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" height="80"></a> -->
+    <a href="https://play.google.com/store/apps/details?id=com.dessalines.thumbkey"><img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/en_get.svg" height="80"></a>
     <a href="https://github.com/dessalines/thumb-key/releases/latest"><img src="https://raw.githubusercontent.com/andOTP/andOTP/master/assets/badges/get-it-on-github.png" height="80"></a>
   </p>
 </p>
@@ -61,6 +61,7 @@ This project is a follow-up to the now unmaintained (and closed-source) [Message
 - Slide left on the `#` key to switch to a default language.
 - Slide up on the `#` key to select and copy all.
 - Slide down on the `#` key to paste.
+- Slide right on the `#` key to switch keyboard position.
 - Practice typing, and check your words per minute, using [monkeytype.com](https://monkeytype.com)
 
 ## Thumb-Key Design
@@ -110,6 +111,7 @@ MessageEase is unfortunately unmaintained, and Thumb-Key uses a better alternati
 - [Releases](https://github.com/dessalines/thumb-key/releases)
 - [IzzyOnDroid](https://apt.izzysoft.de/fdroid/index/apk/com.dessalines.thumbkey)
 - [F-Droid](https://f-droid.org/en/packages/com.dessalines.thumbkey/)
+- [Google Play](https://play.google.com/store/apps/details?id=com.dessalines.thumbkey)
 
 ## How do I add my language or layout?
 

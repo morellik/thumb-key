@@ -2,8 +2,9 @@ package com.dessalines.thumbkey.ui.components.keyboard
 import android.content.Context
 import android.media.AudioManager
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -29,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -69,7 +71,8 @@ fun KeyboardKey(
     onToggleNumericMode: (enable: Boolean) -> Unit,
     onToggleCapsLock: () -> Unit,
     onAutoCapitalize: (enable: Boolean) -> Unit,
-    onSwitchLanguage: () -> Unit
+    onSwitchLanguage: () -> Unit,
+    onSwitchPosition: () -> Unit,
 ) {
     // Necessary for swipe settings to get updated correctly
     val id = key.toString() + animationHelperSpeed + animationSpeed + autoCapitalize + vibrateOnTap + soundOnTap + keySize + minSwipeLength
@@ -153,7 +156,8 @@ fun KeyboardKey(
                     onToggleNumericMode = onToggleNumericMode,
                     onToggleCapsLock = onToggleCapsLock,
                     onAutoCapitalize = onAutoCapitalize,
-                    onSwitchLanguage = onSwitchLanguage
+                    onSwitchLanguage = onSwitchLanguage,
+                    onSwitchPosition = onSwitchPosition,
                 )
                 doneKeyAction(scope, action, isDragged, releasedKey, animationHelperSpeed)
             }
@@ -170,7 +174,7 @@ fun KeyboardKey(
                         offsetY += y
                     },
                     onDragEnd = {
-                        val swipeDirection = swipeDirection(offsetX, offsetY, minSwipeLength)
+                        val swipeDirection = swipeDirection(offsetX, offsetY, minSwipeLength, key.swipeType)
                         val action = key.swipes?.get(swipeDirection)?.action ?: key.center.action
 
                         performKeyAction(
@@ -181,8 +185,10 @@ fun KeyboardKey(
                             onToggleNumericMode = onToggleNumericMode,
                             onToggleCapsLock = onToggleCapsLock,
                             onAutoCapitalize = onAutoCapitalize,
-                            onSwitchLanguage = onSwitchLanguage
+                            onSwitchLanguage = onSwitchLanguage,
+                            onSwitchPosition = onSwitchPosition,
                         )
+                        tapCount = 0
                         lastAction.value = action
 
                         // Reset the drags
@@ -190,20 +196,20 @@ fun KeyboardKey(
                         offsetY = 0f
 
                         doneKeyAction(scope, action, isDragged, releasedKey, animationHelperSpeed)
-                    }
+                    },
                 )
             }
 
     // a 3x3 grid
     // Use box so they can overlap
     Box(
-        modifier = keyboardKeyModifier
+        modifier = keyboardKeyModifier,
     ) {
         Box(
             contentAlignment = Alignment.TopStart,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.TOP_LEFT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -213,7 +219,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.TopCenter,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.TOP)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -223,7 +229,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.TopEnd,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.TOP_RIGHT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -233,7 +239,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.CenterStart,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.LEFT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -243,7 +249,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             KeyText(key.center, keySizeDp, hideLetters, capsLock)
         }
@@ -252,7 +258,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.CenterEnd,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.RIGHT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -262,7 +268,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.BottomStart,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.BOTTOM_LEFT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -272,7 +278,7 @@ fun KeyboardKey(
             contentAlignment = Alignment.BottomCenter,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.BOTTOM)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
@@ -282,35 +288,52 @@ fun KeyboardKey(
             contentAlignment = Alignment.BottomEnd,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = keyPadding)
+                .padding(horizontal = keyPadding),
         ) {
             key.swipes?.get(SwipeDirection.BOTTOM_RIGHT)?.let {
                 KeyText(it, keySizeDp, hideLetters, capsLock)
             }
         }
-        // The popup overlay
+
+        // The animated box that fades out.
         AnimatedVisibility(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = MaterialTheme.colorScheme.tertiaryContainer),
+                .background(color = Color(0, 0, 0, 0)),
             visible = releasedKey.value != null,
-            enter = slideInVertically(tween(animationSpeed)),
-            exit = ExitTransition.None
+            enter = EnterTransition.None,
+            exit = fadeOut(tween(animationSpeed)),
         ) {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize()
+                    .background(color = MaterialTheme.colorScheme.tertiaryContainer),
+            ) {}
+        }
+
+        // The animated key letter that falls downwards and then fades out.
+        AnimatedVisibility(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color(0, 0, 0, 0)),
+            visible = releasedKey.value != null,
+            enter = slideInVertically(tween(animationSpeed)),
+            exit = fadeOut(tween(animationSpeed)),
+        ) {
+            Box(
+                contentAlignment = Alignment.Center,
+                modifier = Modifier.fillMaxSize(),
             ) {
                 val fontSize = fontSizeVariantToFontSize(
                     fontSizeVariant = FontSizeVariant.LARGE,
-                    keySize = keySizeDp
+                    keySize = keySizeDp,
                 )
                 releasedKey.value?.let { text ->
                     Text(
                         text = text,
                         fontWeight = FontWeight.Bold,
                         fontSize = fontSize,
-                        color = MaterialTheme.colorScheme.tertiary
+                        color = MaterialTheme.colorScheme.tertiary,
                     )
                 }
             }
@@ -335,7 +358,7 @@ fun KeyText(key: KeyC, keySize: Dp, hideLetters: Boolean, capsLock: Boolean) {
                 imageVector = display.icon,
                 contentDescription = display.icon.name,
                 tint = color,
-                modifier = Modifier.size(fontSize.value.dp)
+                modifier = Modifier.size(fontSize.value.dp),
             )
         }
         is KeyDisplay.TextDisplay -> {
@@ -345,7 +368,7 @@ fun KeyText(key: KeyC, keySize: Dp, hideLetters: Boolean, capsLock: Boolean) {
                     text = display.text,
                     fontWeight = FontWeight.Bold,
                     fontSize = fontSize,
-                    color = color
+                    color = color,
                 )
             }
         }
