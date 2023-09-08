@@ -1,3 +1,133 @@
+# Thumb-Key 1.13.0 (2023-09-01)
+
+## What's Changed
+
+- Update .woodpecker.yml by @MV-GH in https://github.com/dessalines/thumb-key/pull/363
+- Update build.gradle buildtools version by @MV-GH in https://github.com/dessalines/thumb-key/pull/364
+- Add Thumb-Key Bulgarian v1 with symbols by @salif in https://github.com/dessalines/thumb-key/pull/368
+- Adding croation layouts. Fixes #365 by @dessalines in https://github.com/dessalines/thumb-key/pull/372
+- make "hide letters" only hide letters, add new toggle "hide symbols" (fixes #299) by @nejni-marji in https://github.com/dessalines/thumb-key/pull/370
+- Typesplit fi by @dessalines in https://github.com/dessalines/thumb-key/pull/373
+- Upgrading deps. by @dessalines in https://github.com/dessalines/thumb-key/pull/374
+
+## New Contributors
+
+- @MV-GH made their first contribution in https://github.com/dessalines/thumb-key/pull/363
+- @salif made their first contribution in https://github.com/dessalines/thumb-key/pull/368
+- @nejni-marji made their first contribution in https://github.com/dessalines/thumb-key/pull/370
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.12.0...1.13.0
+
+# Thumb-Key 1.12.0 (2023-08-23)
+
+## What's Changed
+
+- Adding slow path checks to CI. by @dessalines in https://github.com/dessalines/thumb-key/pull/338
+- Fix markdown in issue templates by @KraXen72 in https://github.com/dessalines/thumb-key/pull/346
+- Added Numeric layout for Two Hands by @Lavin-tom in https://github.com/dessalines/thumb-key/pull/342
+- Fixing woodpecker env vars. by @dessalines in https://github.com/dessalines/thumb-key/pull/347
+- Adding thumbkey EO-EN-DE. Fixes #340 by @dessalines in https://github.com/dessalines/thumb-key/pull/348
+- Added greek layout by @iByteABit256 in https://github.com/dessalines/thumb-key/pull/357
+- created czech layout by @Michael36500 in https://github.com/dessalines/thumb-key/pull/355
+- Add MessagEase spanish layout by @gmartineza in https://github.com/dessalines/thumb-key/pull/336
+- Adding MessageEase RU. Fixes #356 by @dessalines in https://github.com/dessalines/thumb-key/pull/359
+- Upgrading deps. by @dessalines in https://github.com/dessalines/thumb-key/pull/358
+- Fix settings crash 1 by @dessalines in https://github.com/dessalines/thumb-key/pull/360
+- Update TypeSplitESv1.1.kt by @racuna in https://github.com/dessalines/thumb-key/pull/361
+
+## New Contributors
+
+- @iByteABit256 made their first contribution in https://github.com/dessalines/thumb-key/pull/357
+- @Michael36500 made their first contribution in https://github.com/dessalines/thumb-key/pull/355
+- @gmartineza made their first contribution in https://github.com/dessalines/thumb-key/pull/336
+- @racuna made their first contribution in https://github.com/dessalines/thumb-key/pull/361
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.11.0...1.12.0
+
+# Thumb-Key 1.11.0 (2023-08-03)
+
+## What's Changed
+
+- Add ENv4MultiLayout by @KraXen72 in https://github.com/dessalines/thumb-key/pull/327
+- Numeric layout for type-split. by @mockballed in https://github.com/dessalines/thumb-key/pull/337
+- Add Hebrew layout based on letter position guidelines by @roihershberg in https://github.com/dessalines/thumb-key/pull/335
+
+## New Contributors
+
+- @KraXen72 made their first contribution in https://github.com/dessalines/thumb-key/pull/327
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.10.0...1.11.0
+
+# Thumb-Key 1.10.0 (2023-07-27)
+
+## What's Changed
+
+- Adding hungarian layout. Fixes #325 by @dessalines in https://github.com/dessalines/thumb-key/pull/330
+- Upgrading deps. by @dessalines in https://github.com/dessalines/thumb-key/pull/331
+- Add spanish esperanto by @dessalines in https://github.com/dessalines/thumb-key/pull/332
+- Add messageease it by @dessalines in https://github.com/dessalines/thumb-key/pull/333
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.9.1...1.10.0
+
+# Thumb-Key 1.9.1 (2023-07-26)
+
+## What's Changed
+
+- Rectified issue of "TwoHands" layout by @Lavin-tom in https://github.com/dessalines/thumb-key/pull/313
+- Capital letters when layout changed by @niccokunzmann in https://github.com/dessalines/thumb-key/pull/322
+- Add single quote to MessageEase German by @meliache in https://github.com/dessalines/thumb-key/pull/323
+- まみむめも=>ゔ by @K0baU in https://github.com/dessalines/thumb-key/pull/326
+
+## New Contributors
+
+- @niccokunzmann made their first contribution in https://github.com/dessalines/thumb-key/pull/322
+- @meliache made their first contribution in https://github.com/dessalines/thumb-key/pull/323
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.9.0...1.9.1
+
+# Thumb-Key 1.9.0 (2023-07-12)
+
+## What's Changed
+
+- Added Two-Hands layout by @Lavin-tom in https://github.com/dessalines/thumb-key/pull/306
+- Added wide layout by @thedroppedpocket in https://github.com/dessalines/thumb-key/pull/308
+
+## New Contributors
+
+- @thedroppedpocket made their first contribution in https://github.com/dessalines/thumb-key/pull/308
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.8.0...1.9.0
+
+# Thumb-Key 1.8.0 (2023-07-06)
+
+## What's Changed
+
+- ThumbKeyFRv2: Fix key "U" writing "uU". by @mockballed in https://github.com/dessalines/thumb-key/pull/298
+- New "Type-Split" layouts. by @mockballed in https://github.com/dessalines/thumb-key/pull/296
+- Fix bug in deleteLastWord by @tbhno in https://github.com/dessalines/thumb-key/pull/305
+
+## New Contributors
+
+- @tbhno made their first contribution in https://github.com/dessalines/thumb-key/pull/305
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.7.0...1.8.0
+
+# Thumb-Key 1.7.0 (2023-06-18)
+
+## What's Changed
+
+- Update Danish translation and fix minor errors in the Danish keyboard by @Limfjorden in https://github.com/dessalines/thumb-key/pull/286
+- Fix swedish keyboard by @maxhambraeus in https://github.com/dessalines/thumb-key/pull/287
+- Update ThumbKeyIDv1Symbols.kt by @awandepan in https://github.com/dessalines/thumb-key/pull/289
+- New layout: "Four columns" (English). by @mockballed in https://github.com/dessalines/thumb-key/pull/292
+- Add debug mode. by @dessalines in https://github.com/dessalines/thumb-key/pull/294
+
+## New Contributors
+
+- @maxhambraeus made their first contribution in https://github.com/dessalines/thumb-key/pull/287
+
+**Full Changelog**: https://github.com/dessalines/thumb-key/compare/1.6.1...1.7.0
+
 # Thumb-Key 1.6.1 (2023-06-10)
 
 ## What's Changed

@@ -25,7 +25,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
-import androidx.core.text.trimmedLength
 import androidx.navigation.NavController
 import com.dessalines.thumbkey.IMEService
 import com.dessalines.thumbkey.MainActivity
@@ -34,18 +33,26 @@ import com.dessalines.thumbkey.db.DEFAULT_KEYBOARD_LAYOUT
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_DE_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_EN_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_EN_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_ES_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_FR_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_HE_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_IT_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.MESSAGEEASE_RU_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.MESSAGEEASE_RU_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.T9_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_BG_V1_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_BY_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_BY_V1_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_CZ_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_DA_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_DE_V2_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_DE_V2_MULTILINGUAL_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_MULTI_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_PROGRAMMER_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EN_V4_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_EOENDE_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_ES_EO_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_ES_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_EU_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FA_V1_KEYBOARD_MODES
@@ -53,11 +60,17 @@ import com.dessalines.thumbkey.keyboards.THUMBKEY_FI_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FI_V1_WIDE_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FR_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_FR_V2_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_GR_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_HE_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_HR_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_HR_V1_SYMBOLS_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_HU_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_ID_V1_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_IT_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_JA_V1_HIRAGANA_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_JA_V1_KATAKANA_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_KA_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.THUMBKEY_LV_LTG_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_NL_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_NO_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_PL_V2_KEYBOARD_MODES
@@ -67,6 +80,17 @@ import com.dessalines.thumbkey.keyboards.THUMBKEY_RU_V2_SYMBOLS_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_SV_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_TR_V1_KEYBOARD_MODES
 import com.dessalines.thumbkey.keyboards.THUMBKEY_UK_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TWO_HANDS_EN_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TWO_HANDS_HR_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_DE_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_EN_V2_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_ES_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_FI_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_FR_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_IT_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_PL_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.TYPESPLIT_PT_V1_KEYBOARD_MODES
+import com.dessalines.thumbkey.keyboards.WIDE_LAYOUT_EN_PROGRAMMER_KEYBOARD_MODES
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -102,6 +126,7 @@ fun keyboardLayoutToModes(layout: KeyboardLayout): Map<KeyboardMode, KeyboardC> 
     return when (layout) {
         KeyboardLayout.ThumbKeyENv4 -> THUMBKEY_EN_V4_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyENv4Programmer -> THUMBKEY_EN_V4_PROGRAMMER_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyENv4Multi -> THUMBKEY_EN_V4_MULTI_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyDEv2 -> THUMBKEY_DE_V2_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyDAv1 -> THUMBKEY_DA_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyESv1 -> THUMBKEY_ES_V1_KEYBOARD_MODES
@@ -110,6 +135,7 @@ fun keyboardLayoutToModes(layout: KeyboardLayout): Map<KeyboardMode, KeyboardC> 
         KeyboardLayout.ThumbKeyFIv1 -> THUMBKEY_FI_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyFIv1Wide -> THUMBKEY_FI_V1_WIDE_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyFRv1 -> THUMBKEY_FR_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyGRv1 -> THUMBKEY_GR_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyITv1 -> THUMBKEY_IT_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyNLv1 -> THUMBKEY_NL_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyPLv2 -> THUMBKEY_PL_V2_KEYBOARD_MODES
@@ -117,6 +143,7 @@ fun keyboardLayoutToModes(layout: KeyboardLayout): Map<KeyboardMode, KeyboardC> 
         KeyboardLayout.ThumbKeyRUv2 -> THUMBKEY_RU_V2_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyUKv1 -> THUMBKEY_UK_V1_KEYBOARD_MODES
         KeyboardLayout.MessageEaseEN -> MESSAGEEASE_EN_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseES -> MESSAGEEASE_ES_KEYBOARD_MODES
         KeyboardLayout.MessageEaseENSymbols -> MESSAGEEASE_EN_SYMBOLS_KEYBOARD_MODES
         KeyboardLayout.MessageEaseHE -> MESSAGEEASE_HE_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyENv4Symbols -> THUMBKEY_EN_V4_SYMBOLS_KEYBOARD_MODES
@@ -136,6 +163,28 @@ fun keyboardLayoutToModes(layout: KeyboardLayout): Map<KeyboardMode, KeyboardC> 
         KeyboardLayout.ThumbKeyFRv2 -> THUMBKEY_FR_V2_KEYBOARD_MODES
         KeyboardLayout.ThumbKeySVv1 -> THUMBKEY_SV_V1_KEYBOARD_MODES
         KeyboardLayout.ThumbKeyTRv1 -> THUMBKEY_TR_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitENv2 -> TYPESPLIT_EN_V2_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitESv1 -> TYPESPLIT_ES_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitDEv1 -> TYPESPLIT_DE_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitITv1 -> TYPESPLIT_IT_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitFRv1 -> TYPESPLIT_FR_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitPTv1 -> TYPESPLIT_PT_V1_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitPLv1 -> TYPESPLIT_PL_V1_KEYBOARD_MODES
+        KeyboardLayout.TwoHandsENv1 -> TWO_HANDS_EN_V1_KEYBOARD_MODES
+        KeyboardLayout.WideLayoutENProgrammer -> WIDE_LAYOUT_EN_PROGRAMMER_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyHUv1 -> THUMBKEY_HU_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyESEOv1 -> THUMBKEY_ES_EO_V1_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseIT -> MESSAGEEASE_IT_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyHEv1 -> THUMBKEY_HE_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyEOENDEv1 -> THUMBKEY_EOENDE_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyCZv1 -> THUMBKEY_CZ_V1_KEYBOARD_MODES
+        KeyboardLayout.MessageEaseRU -> MESSAGEEASE_RU_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyBGv1Symbols -> THUMBKEY_BG_V1_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.TwoHandsHRv1 -> TWO_HANDS_HR_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyHRv1 -> THUMBKEY_HR_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyHRv1Symbols -> THUMBKEY_HR_V1_SYMBOLS_KEYBOARD_MODES
+        KeyboardLayout.TypeSplitFIv1 -> TYPESPLIT_FI_V1_KEYBOARD_MODES
+        KeyboardLayout.ThumbKeyLVLTGv1 -> THUMBKEY_LV_LTG_V1_KEYBOARD_MODES
     }
 }
 
@@ -384,14 +433,10 @@ fun autoCapitalizeCheck(
 fun deleteLastWord(ime: IMEService) {
     val lastWords = ime.currentInputConnection.getTextBeforeCursor(100, 0)
 
-    val trimmedLength = lastWords?.length?.minus(lastWords.trimmedLength()) ?: 0
+    val trailingSpacesLength = lastWords?.length?.minus(lastWords.trimEnd().length) ?: 0
     val trimmed = lastWords?.trim()
     val lastWordLength = trimmed?.split("\\s".toRegex())?.lastOrNull()?.length ?: 1
-    val minDelete = if (lastWordLength > 0) {
-        lastWordLength + trimmedLength
-    } else {
-        1
-    }
+    val minDelete = lastWordLength + trailingSpacesLength
 
     ime.currentInputConnection.deleteSurroundingText(minDelete, 0)
 }

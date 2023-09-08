@@ -9,6 +9,7 @@
     <string name="pink">Pink</string>
     <string name="srcery">Srcery</string>
     <string name="blue">Blue</string>
+    <string name="dracula">Dracula</string>
     <string name="center">Center</string>
     <string name="right">Right</string>
     <string name="left">Left</string>
@@ -40,6 +41,9 @@
     <string name="animation_speed">Animation Speed: %1$s</string>
     <string name="animation_helper_speed">Animation Helper Speed: %1$s</string>
     <string name="reset_to_defaults">Reset to defaults</string>
+    <string name="reset_to_defaults_msg">Are you sure you want to reset settings to defaults?</string>
+    <string name="reset_to_defaults_confirm">Reset</string>
+    <string name="cancel">Cancel</string>
     <string name="test_out_thumbkey">Test out Thumb-Key</string>
     <string name="setup">Setup</string>
     <string name="user_guide">User Guide</string>
@@ -49,6 +53,7 @@
     <string name="finish_setup">Finish Setup</string>
     <string name="copy_all">Copy All</string>
     <string name="hide_letters">Hide Letters</string>
+    <string name="hide_symbols">Hide Symbols</string>
     <string name="save">Save</string>
     <string name="key_borders">Key Borders</string>
     <string name="spacebar_multitaps">Spacebar Multi-taps</string>
